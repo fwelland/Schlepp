@@ -1,0 +1,76 @@
+import org.gradle.api.artifacts.*
+apply plugin: 'java'
+apply plugin: 'ear'
+apply plugin: 'cargo'
+
+sourceCompatibility = '1.7'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
+    }
+}
+
+
+repositories {
+    maven {
+        // org.wildfly:wildfly-controller-client:8.1.0.Final has a transitive dependency on 
+        // org.jboss.remoting:jboss-remoting:4.0.3.Final, which is only found here:
+        url 'https://repository.jboss.org/nexus/content/groups/public/'
+    }
+}
+
+
+
+subprojects {
+    apply from: rootProject.file('common.gradle')
+}
+
+dependencies {
+    deploy project(':Outbound')
+    
+    
+    cargo 'org.wildfly:wildfly-controller-client:8.1.0.Final'
+//
+//    // Without cargo-ant you'll get following error:
+//    //   Problem: failed to create task or type cargo
+    cargo 'org.codehaus.cargo:cargo-ant:1.4.8'    
+    
+}
+
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '1.12'
+}
+
+
+cargo {
+    containerId = 'wildfly8x'
+
+    deployable {
+        context = 'Lighthouse'
+    }
+
+    local {
+        homeDir = file('/opt/wildfly-8.1.0.Final')
+    }
+}
+
+
+//
+//task mergedJavadoc(type: Javadoc, description: 'Creates Javadoc from all the projects.') {
+//    title = 'All modules'
+//    destinationDir = new File(project.buildDir, 'merged-javadoc')
+//
+//    // Note: The closures below are executed lazily.
+//    source {
+//       subprojects*.sourceSets*.main*.allSource
+//    }
+//    classpath.from {
+//        subprojects*.configurations*.compile*.copyRecursive({ !(it instanceof ProjectDependency); })*.resolve()
+//    }
+//}

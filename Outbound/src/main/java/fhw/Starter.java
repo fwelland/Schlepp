@@ -1,41 +1,43 @@
 package fhw;
-
 import javax.annotation.*;
 import javax.ejb.*;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 
-@Singleton
-@Startup
-public class Starter
+@Stateless
+@ApplicationPath("schlepp")
+@Produces(MediaType.TEXT_PLAIN)
+public class Starter 
+    extends Application
 {
-
     public Starter()
     {
-        
+        System.out.println("constructor...."); 
     }
     
     @PostConstruct
     void postStructor()
     {
         System.out.println("@PostConstruction of the Starter....."); 
-        
-        
+                
         System.out.println(".....@PostConstruct done."); 
     }
+    
+    @GET
+    @Path("/addDir")
+    public String addDirectoryToMonitor(@QueryParam("dir") String pathToWatch)
+    {
+        System.out.println( String.format("I have been called with [%s]", pathToWatch)); 
+        String result = "nothing"; 
+        if(null != pathToWatch && pathToWatch.length() > 0)
+        {
+            result = String.format("I got your [%s]",pathToWatch); 
+        }
+        return(result); 
+    }
 }
-
-
-
-//@Singleton
-//@Startup
-//public class Initialiser {
-//
-//    @EJB
-//    private FileSystemMonitor fileSystemMonitor;
-//
-//    @PostConstruct
-//    public void init() {
-//        String fileSystemPath = ....;
-//        fileSystemMonitor.poll(fileSystemPath);
-//    }
-//
-//}

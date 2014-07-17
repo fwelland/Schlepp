@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 
 
-@Path("/addDir")    
+@Path("/addDir")
 @Stateless
 @ApplicationPath("schlepp")
 public class Starter 

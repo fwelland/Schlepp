@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    deploy project(':Outbound')       
+    deploy project(path: ':Outbound', configuration: 'archives')        
 }
 
 cargo {

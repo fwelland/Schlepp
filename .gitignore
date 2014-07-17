@@ -1,4 +1,4 @@
-/.nb-gradle/private/
+.nb-gradle*
 /Outbound/build/
 /build/
 /.gradle/2.0/taskArtifacts/cache.properties

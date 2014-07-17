@@ -4,14 +4,13 @@ import javax.ejb.*;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
 
+
+@Path("/addDir")    
 @Stateless
 @ApplicationPath("schlepp")
-@Produces(MediaType.TEXT_PLAIN)
 public class Starter 
     extends Application
 {
@@ -29,7 +28,6 @@ public class Starter
     }
     
     @GET
-    @Path("/addDir")
     public String addDirectoryToMonitor(@QueryParam("dir") String pathToWatch)
     {
         System.out.println( String.format("I have been called with [%s]", pathToWatch)); 

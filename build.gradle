@@ -1,15 +1,4 @@
-apply plugin: 'java'
 apply plugin: 'ear'
-apply plugin: 'cargo'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
-    }
-}
 
 repositories {
     mavenCentral(); 
@@ -20,14 +9,6 @@ repositories {
 
 dependencies {
     deploy project(path: ':Outbound', configuration: 'archives')        
-}
-
-cargo {
-    containerId = 'wildfly8x'
-
-    local {
-        homeDir = file('/opt/wildfly-8.1.0.Final')
-    }
 }
 
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {

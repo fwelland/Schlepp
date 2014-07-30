@@ -1,4 +1,17 @@
 apply plugin: 'ear'
+apply plugin: 'wildfly'
+
+
+buildscript {
+    repositories {
+        flatDir {
+            dirs '../gradle-wildfly-plugin/build/libs'
+        }
+    }    
+    dependencies {
+        classpath name: 'gradle-wildfly-plugin'
+    }
+}
 
 repositories {
     mavenCentral(); 
@@ -14,3 +27,9 @@ dependencies {
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
     gradleVersion = '2.0'
 }
+
+wildfly
+{
+   wildfly_home = '/opt/wildfly-8.1.0.Final'
+}
+

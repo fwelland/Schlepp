@@ -31,5 +31,6 @@ task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper
 wildfly
 {
    wildfly_home = '/opt/wildfly-8.1.0.Final'
+   deployment_name = 'Schlepp'
 }
 

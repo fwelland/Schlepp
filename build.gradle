@@ -1,15 +1,14 @@
 apply plugin: 'ear'
 apply plugin: 'wildfly'
 
-
 buildscript {
     repositories {
-        flatDir {
-            dirs '../gradle-wildfly-plugin/build/libs'
+        maven {
+            url 'http://dl.bintray.com/fwelland/FredsStuff'
         }
     }    
     dependencies {
-        classpath name: 'gradle-wildfly-plugin'
+        classpath 'org.fhw:gradle-wildfly-plugin:0.1'
     }
 }
 

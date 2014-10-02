@@ -8,7 +8,7 @@ buildscript {
         }
     }    
     dependencies {
-        classpath 'org.fhw:gradle-wildfly-plugin:0.1'
+        classpath 'org.fhw:gradle-wildfly-plugin:0.2'
     }
 }
 
